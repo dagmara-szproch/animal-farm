@@ -1,0 +1,38 @@
+{% load static %}
+
+<!-- Top line: logo, search, profile -->
+<nav class="bg-white shadow">
+    <div class="container mx-auto px-10">
+        <div class="hidden md:flex flex items-center justify-between py-8">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="text-2xl font-bold text-cyan-800">AnimalRescue</a>
+
+            <!-- Search -->
+            <div class="flex-1 mx-6">
+                <input
+                    type="text"
+                    aria-label="Search animals"
+                    class="w-full max-w-md px-4 py-2 border rounded text-base focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                    placeholder="Search animals..."
+                >
+            </div>
+
+            <!-- User/profile -->
+            <div class="flex items-center space-x-6 text-lg">
+                <a href="#" class="text-lime-900 hover:text-lime-700 font-bold">Login</a>
+                <a href="#" class="text-lime-900 hover:text-lime-700 font-bold">Register</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Bottom line: categories + volunteer -->
+<div class="hidden md:flex justify-center bg-lime-100 p-10 space-x-10 font-medium">
+    {% for category in categories %}
+        <a href="{% url 'animals:by_category' category.slug %}" class="text-lime-950 hover:underline">
+            {{ category.name }}
+        </a>
+    {% endfor %}
+
+    <a href="#" class="bg-cyan-800 text-lime-50 px-4 py-1 rounded hover:bg-cyan-700">Volunteer with us</a>
+</div>

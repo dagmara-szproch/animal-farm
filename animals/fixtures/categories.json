@@ -1,0 +1,29 @@
+[
+  {
+    "model": "animals.category",
+    "pk": 1,
+    "fields": {
+      "name": "Horses",
+      "slug": "horses",
+      "description": "All the rescued horses at the farm."
+    }
+  },
+  {
+    "model": "animals.category",
+    "pk": 2,
+    "fields": {
+      "name": "Goats",
+      "slug": "goats",
+      "description": "Friendly and playful goats."
+    }
+  },
+  {
+    "model": "animals.category",
+    "pk": 3,
+    "fields": {
+      "name": "Poultry",
+      "slug": "poultry",
+      "description": "Chickens, ducks and other birds."
+    }
+  }
+]

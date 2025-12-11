@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block hero %}
+    {% include "includes/hero.html" %}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6 bg-lime-100 p-10 rounded text-center">
+    {% if view.kwargs.slug %}
+        {{ view.kwargs.slug|title }}
+    {% else %}
+        All Animals
+    {% endif %}
+</h1>
+
+<div class="flex flex-wrap justify-center gap-6">
+    {% for animal in animals %}
+        <div class="bg-white rounded shadow w-64">
+            <a href="{% url 'animals:detail' animal.slug %}">
+                <img src="{{ animal.image_or_placeholder }}" alt="{{ animal.name }}" class="w-full h-48 object-cover">
+                <div class="p-2">
+                    <h2>{{ animal.name }}</h2>
+                    <p>{{ animal.species }}</p>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <p>No animals found in this category.</p>
+    {% endfor %}
+</div>
+
+{% if is_paginated %}
+<div class="mt-6 flex justify-center space-x-2">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-1 bg-gray-200 rounded">Previous</a>
+    {% endif %}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-1 bg-gray-200 rounded">Next</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

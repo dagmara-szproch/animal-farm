@@ -1,0 +1,53 @@
+[
+  {
+    "model": "animals.animal",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "Lucky",
+      "slug": "lucky",
+      "species": "Horse",
+      "breed": "Thoroughbred",
+      "description": "Lucky is a gentle horse who loves carrots.",
+      "story": "Lucky was rescued after being abandoned by his previous owner. He is very friendly and enjoys long walks.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+  {
+    "model": "animals.animal",
+    "pk": 2,
+    "fields": {
+      "category": 2,
+      "name": "Spiky",
+      "slug": "spiky",
+      "species": "Goat",
+      "breed": "Pygmy",
+      "description": "Spiky loves to play in the field and is very curious.",
+      "story": "Spiky was rescued from a smallholding where he had little care. He is now thriving and friendly.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+  {
+    "model": "animals.animal",
+    "pk": 3,
+    "fields": {
+      "category": 3,
+      "name": "Clucky",
+      "slug": "clucky",
+      "species": "Chicken",
+      "breed": "Rhode Island Red",
+      "description": "Clucky is a friendly hen who loves visitors.",
+      "story": "Clucky was found wandering near a farm. She is very social and lays plenty of eggs.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  }
+]

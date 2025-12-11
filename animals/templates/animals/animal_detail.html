@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block hero %}
+    {% include "includes/hero.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-4">{{ animal.name }}</h1>
+    <img src="{{ animal.image_or_placeholder }}" alt="{{ animal.name }}" class="w-full max-w-md h-64 object-cover mb-4">
+    <p class="text-gray-600 mb-2"><strong>Species:</strong> {{ animal.species }}</p>
+    {% if animal.breed %}<p class="text-gray-600 mb-2"><strong>Breed:</strong> {{ animal.breed }}</p>{% endif %}
+    <p class="text-gray-500 mb-2">{{ animal.description }}</p>
+    {% if animal.story %}<p class="text-gray-500 mt-4"><em>{{ animal.story }}</em></p>{% endif %}
+</div>
+{% endblock %}
