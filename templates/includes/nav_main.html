@@ -19,8 +19,23 @@
 
             <!-- User/profile -->
             <div class="flex items-center space-x-6 text-lg">
-                <a href="#" class="text-lime-900 hover:text-lime-700 font-bold">Login</a>
-                <a href="#" class="text-lime-900 hover:text-lime-700 font-bold">Register</a>
+                {% if user.is_authenticated %}
+                    <span class="text-lime-900">Welcome, {{ user.get_short_name|default:user.username }}</span>
+                    <div class="flex items-center space-x-4">
+                        {% if user.role == 'donor' %}
+                            <a href="#" class="text-lime-900 hover:text-cyan-800">Dashboard</a>
+                        {% elif user.role == 'volunteer' and user.is_approved %}
+                            <a href="#" class="text-lime-900 hover:text-cyan-800">Volunteer</a>
+                        {% elif user.role == 'volunteer' and not user.is_approved %}
+                            <a href="#" class="text-lime-900 hover:text-cyan-800">Pending</a>
+                        {% endif %}
+                        <a href="#" class="text-lime-900 hover:text-cyan-800">Profile</a>
+                        <a href="{% url 'account_logout' %}" class="text-lime-900 hover:text-cyan-800">Logout</a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="text-lime-900 hover:text-lime-700 font-bold">Login</a>
+                    <a href="{% url 'account_signup' %}" class="text-lime-900 hover:text-lime-700 font-bold">Register</a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -28,11 +43,20 @@
 
 <!-- Bottom line: categories + volunteer -->
 <div class="hidden md:flex justify-center bg-lime-100 p-10 space-x-10 font-medium">
-    {% for category in categories %}
-        <a href="{% url 'animals:by_category' category.slug %}" class="text-lime-950 hover:underline">
-            {{ category.name }}
-        </a>
-    {% endfor %}
+    <!-- Categories from animals app -->
+    {% if categories %}
+        {% for category in categories %}
+            <a href="{% url 'animals:by_category' category.slug %}" class="text-lime-950 hover:underline">
+                {{ category.name }}
+            </a>
+        {% endfor %}
+    {% else %}
+        <!-- Placeholder categories -->
+        <a href="#" class="text-lime-950 hover:underline">Cats</a>
+        <a href="#" class="text-lime-950 hover:underline">Dogs</a>
+        <a href="#" class="text-lime-950 hover:underline">Small Animals</a>
+        <a href="#" class="text-lime-950 hover:underline">Birds</a>
+    {% endif %}
 
     <a href="#" class="bg-cyan-800 text-lime-50 px-4 py-1 rounded hover:bg-cyan-700">Volunteer with us</a>
 </div>

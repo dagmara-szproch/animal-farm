@@ -1,0 +1,70 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block title %}Sign Up - AnimalRescue{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto my-12 p-6 bg-lime-50 rounded-lg shadow">
+    <h1 class="text-3xl font-bold text-cyan-800 mb-6 text-center">Create Account</h1>
+    
+    <form method="POST" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        
+        <div class="mb-4">
+            <label class="block text-lime-950 mb-2">Email Address</label>
+            <input type="email" name="email" required 
+                   class="w-full px-4 py-2 border border-lime-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                   placeholder="you@example.com">
+        </div>
+        
+        <div class="mb-4">
+            <label class="block text-lime-950 mb-2">Password</label>
+            <input type="password" name="password1" required 
+                   class="w-full px-4 py-2 border border-lime-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                   placeholder="••••••••">
+            <p class="text-sm text-lime-700 mt-1">At least 8 characters</p>
+        </div>
+        
+        <div class="mb-6">
+            <label class="block text-lime-950 mb-2">Confirm Password</label>
+            <input type="password" name="password2" required 
+                   class="w-full px-4 py-2 border border-lime-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                   placeholder="••••••••">
+        </div>
+        
+        <div class="mb-6 text-sm">
+            <input type="checkbox" name="terms" id="terms" required
+                   class="h-4 w-4 text-cyan-800 border-lime-300 rounded">
+            <label for="terms" class="ml-2 text-lime-950">
+                I agree to the <a href="#" class="text-cyan-800 hover:underline">Terms</a> and 
+                <a href="#" class="text-cyan-800 hover:underline">Privacy Policy</a>
+            </label>
+        </div>
+        
+        <button type="submit" 
+                class="w-full bg-cyan-800 text-lime-50 py-3 rounded hover:bg-cyan-700 font-medium">
+            Create Account
+        </button>
+        
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+    </form>
+    
+    <div class="mt-6 pt-6 border-t border-lime-300 text-center">
+        <p class="text-lime-950">
+            Already have an account? 
+            <a href="{% url 'account_login' %}" class="text-cyan-800 font-medium hover:underline">
+                Sign in here
+            </a>
+        </p>
+    </div>
+    
+    <div class="mt-6 p-4 bg-cyan-50 rounded border border-cyan-200">
+        <p class="text-sm text-cyan-800">
+            <strong>Note:</strong> This creates a <strong>donor account</strong>.
+            To volunteer, please apply through the volunteer form.
+        </p>
+    </div>
+</div>
+{% endblock %}

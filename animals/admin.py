@@ -8,9 +8,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
     prepopulated_fields = {'slug': ('name',)}
 
-    class Meta:
-        verbose_name_plural = "Categories"
-
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
     list_display = ('name', 'species', 'breed', 'category', 'is_active', 'date_deceased')

@@ -8,8 +8,6 @@ def home(request):
     animals = Animal.objects.filter(is_active=True)
     return render(request, 'home.html', {'animals': animals})
 
-def categories_context(request):
-    return {'categories': Category.objects.all()}
 
 class AnimalListView(ListView):
     model = Animal

@@ -23,10 +23,17 @@
 
             <!-- Categories -->
             <div class="pt-2 space-y-1">
-                {% for category in categories %}
-                    <a href="{% url 'animals:by_category' category.slug %}" 
-                       class="block text-lime-950 font-medium hover:underline">{{ category.name }}</a>
-                {% endfor %}
+                {% if categories %}
+                    {% for category in categories %}
+                        <a href="{% url 'animals:by_category' category.slug %}" 
+                           class="block text-lime-950 font-medium hover:underline">{{ category.name }}</a>
+                    {% endfor %}
+                {% else %}
+                    <!-- Placeholder categories -->
+                    <a href="#" class="block text-lime-950 font-medium hover:underline">Cats</a>
+                    <a href="#" class="block text-lime-950 font-medium hover:underline">Dogs</a>
+                    <a href="#" class="block text-lime-950 font-medium hover:underline">Small Animals</a>
+                {% endif %}
             </div>
 
             <!-- Volunteer button -->
@@ -38,6 +45,15 @@
             <div class="pt-2 border-t mt-2 space-y-1">
                 {% if request.user.is_authenticated %}
                     <span class="block mb-1 text-lime-950">Welcome, {{ request.user.username }}</span>
+                    
+                    {% if user.role == 'donor' %}
+                        <a href="#" class="block text-lime-900 hover:underline">Donor Dashboard</a>
+                    {% elif user.role == 'volunteer' and user.is_approved %}
+                        <a href="#" class="block text-lime-900 hover:underline">Volunteer Dashboard</a>
+                    {% elif user.role == 'volunteer' and not user.is_approved %}
+                        <a href="#" class="block text-lime-900 hover:underline">Pending Approval</a>
+                    {% endif %}
+                    
                     <a href="#" class="block text-lime-900 hover:underline">Profile</a>
                     <a href="{% url 'account_logout' %}" class="block text-lime-900 hover:underline">Logout</a>
                 {% else %}

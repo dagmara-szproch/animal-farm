@@ -1,0 +1,35 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load account %}
+
+{% block title %}{% trans "Confirm Email" %} - AnimalRescue{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto my-12 p-6 bg-lime-50 rounded-lg shadow text-center">
+    {% if confirmation %}
+        <i class="fas fa-envelope text-4xl text-cyan-800 mb-4"></i>
+        <h1 class="text-2xl font-bold text-cyan-800 mb-4">Confirm Email Address</h1>
+        <p class="text-lime-950 mb-6">
+            Please confirm that <strong>{{ confirmation.email_address.email }}</strong> is your email address.
+        </p>
+        
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+            {% csrf_token %}
+            <button type="submit" 
+                    class="bg-cyan-800 text-lime-50 py-3 px-8 rounded hover:bg-cyan-700 font-medium">
+                {% trans "Confirm Email" %}
+            </button>
+        </form>
+    {% else %}
+        <i class="fas fa-exclamation-triangle text-4xl text-yellow-500 mb-4"></i>
+        <h1 class="text-xl font-bold text-cyan-800 mb-4">Invalid Confirmation Link</h1>
+        <p class="text-lime-950 mb-4">
+            This email confirmation link has expired or is invalid.
+        </p>
+        <a href="{% url 'account_login' %}" 
+           class="text-cyan-800 hover:underline font-medium">
+            {% trans "Return to Login" %}
+        </a>
+    {% endif %}
+</div>
+{% endblock %}

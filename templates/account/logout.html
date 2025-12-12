@@ -1,0 +1,29 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block title %}Logout - AnimalRescue{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto my-12 p-6 bg-lime-50 rounded-lg shadow text-center">
+    <h1 class="text-2xl font-bold text-cyan-800 mb-4">Sign Out</h1>
+    <p class="text-lime-950 mb-8">Are you sure you want to sign out?</p>
+    
+    <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        
+        <div class="flex space-x-4">
+            <a href="#" onclick="history.back(); return false;" 
+               class="flex-1 bg-lime-200 text-lime-950 py-3 rounded hover:bg-lime-300 font-medium">
+                Cancel
+            </a>
+            <button type="submit" 
+                    class="flex-1 bg-cyan-800 text-lime-50 py-3 rounded hover:bg-cyan-700 font-medium">
+                Sign Out
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
