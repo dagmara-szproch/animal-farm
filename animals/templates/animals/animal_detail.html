@@ -6,12 +6,155 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold mb-4">{{ animal.name }}</h1>
-    <img src="{{ animal.image_or_placeholder }}" alt="{{ animal.name }}" class="w-full max-w-md h-64 object-cover mb-4">
-    <p class="text-gray-600 mb-2"><strong>Species:</strong> {{ animal.species }}</p>
-    {% if animal.breed %}<p class="text-gray-600 mb-2"><strong>Breed:</strong> {{ animal.breed }}</p>{% endif %}
-    <p class="text-gray-500 mb-2">{{ animal.description }}</p>
-    {% if animal.story %}<p class="text-gray-500 mt-4"><em>{{ animal.story }}</em></p>{% endif %}
+<div class="container mx-auto px-4 py-12">
+    <!-- Animal header with category -->
+    <div class="mb-8">
+        <div class="inline-block bg-lime-100 text-cyan-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            {% if animal.category %}
+                <a href="{% url 'animals:by_category' animal.category.slug %}" class="hover:underline">
+                    {{ animal.category.name }}
+                </a>
+            {% else %}
+                Animal
+            {% endif %}
+        </div>
+        <h1 class="text-4xl font-bold text-cyan-800">{{ animal.name }}</h1>
+    </div>
+
+    <!-- Main content grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Left column: Image -->
+        <div class="space-y-6">
+            <!-- Main image -->
+            <div class="bg-lime-50 p-6 rounded-xl shadow-lg">
+                <img src="{{ animal.image_or_placeholder }}" 
+                     alt="{{ animal.name }}" 
+                     class="w-full h-96 object-cover rounded-lg shadow">
+            </div>
+            
+            <!-- Quick stats (optional - add more fields to model if needed) -->
+            <div class="bg-cyan-50 p-6 rounded-xl">
+                <h3 class="text-xl font-bold text-cyan-800 mb-4">Quick Facts</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between border-b border-cyan-100 pb-2">
+                        <span class="text-lime-950 font-medium">Species:</span>
+                        <span class="text-cyan-800 font-bold">{{ animal.species }}</span>
+                    </div>
+                    {% if animal.breed %}
+                    <div class="flex justify-between border-b border-cyan-100 pb-2">
+                        <span class="text-lime-950 font-medium">Breed:</span>
+                        <span class="text-cyan-800 font-bold">{{ animal.breed }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="flex justify-between border-b border-cyan-100 pb-2">
+                        <span class="text-lime-950 font-medium">Status:</span>
+                        <span class="text-lime-700 font-bold">Looking for Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right column: Description & Donation -->
+        <div class="space-y-8">
+            <!-- Description -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-lime-100">
+                <h2 class="text-2xl font-bold text-cyan-800 mb-4">About {{ animal.name }}</h2>
+                <p class="text-lime-950 leading-relaxed mb-6">{{ animal.description }}</p>
+                
+                {% if animal.story %}
+                <div class="mt-8 pt-8 border-t border-lime-200">
+                    <h3 class="text-xl font-bold text-cyan-800 mb-4">{{ animal.name }}'s Story</h3>
+                    <p class="text-lime-800 italic leading-relaxed">{{ animal.story }}</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Support this animal section -->
+            <div class="bg-lime-50 p-8 rounded-xl shadow-lg border border-lime-200">
+                <h2 class="text-2xl font-bold text-cyan-800 mb-6">Support {{ animal.name }}</h2>
+                
+                <p class="text-lime-950 mb-8">
+                    Your donation helps provide food, medical care, and shelter for {{ animal.name }} 
+                    and other rescued animals.
+                </p>
+
+                <!-- One-time donation -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-lime-950 mb-4">One-time Donation</h3>
+                    <div class="grid grid-cols-3 gap-3 mb-4">
+                        <button type="button" 
+                                class="bg-white border-2 border-cyan-800 text-cyan-800 py-3 rounded-lg hover:bg-cyan-50 font-medium transition">
+                            £5
+                        </button>
+                        <button type="button" 
+                                class="bg-white border-2 border-cyan-800 text-cyan-800 py-3 rounded-lg hover:bg-cyan-50 font-medium transition">
+                            £10
+                        </button>
+                        <button type="button" 
+                                class="bg-white border-2 border-cyan-800 text-cyan-800 py-3 rounded-lg hover:bg-cyan-50 font-medium transition">
+                            £25
+                        </button>
+                    </div>
+                    <div class="mb-4">
+                        <input type="number" 
+                               placeholder="Custom amount (£)"
+                               class="w-full px-4 py-3 border border-lime-300 rounded-lg focus:ring-2 focus:ring-cyan-300 focus:border-cyan-500"
+                               min="1" step="1">
+                    </div>
+                    <button type="button" 
+                            class="w-full bg-cyan-800 text-lime-50 py-3 rounded-lg hover:bg-cyan-700 font-bold text-lg transition">
+                        Donate Now
+                    </button>
+                </div>
+
+                <!-- Monthly adoption (subscription) -->
+                <div class="pt-8 border-t border-lime-300">
+                    <h3 class="text-xl font-bold text-lime-950 mb-4">Adopt Monthly</h3>
+                    <p class="text-lime-800 mb-6">
+                        Become {{ animal.name }}'s monthly guardian with a recurring donation.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <button type="button" 
+                                class="bg-white border-2 border-lime-500 text-lime-700 py-3 rounded-lg hover:bg-lime-50 font-medium transition">
+                            £10/month
+                        </button>
+                        <button type="button" 
+                                class="bg-white border-2 border-lime-500 text-lime-700 py-3 rounded-lg hover:bg-lime-50 font-medium transition">
+                            £25/month
+                        </button>
+                    </div>
+                    <button type="button" 
+                            class="w-full bg-lime-600 text-white py-3 rounded-lg hover:bg-lime-700 font-bold text-lg transition">
+                        Adopt {{ animal.name }} Monthly
+                    </button>
+                </div>
+
+                <!-- Login reminder -->
+                {% if not user.is_authenticated %}
+                <div class="mt-6 p-4 bg-cyan-50 border border-cyan-200 rounded-lg">
+                    <p class="text-cyan-800 text-sm">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        You'll need to <a href="{% url 'account_login' %}" class="font-bold hover:underline">login</a> 
+                        or <a href="{% url 'account_signup' %}" class="font-bold hover:underline">sign up</a> to donate.
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to animals link -->
+    <div class="mt-12 text-center">
+        <a href="{% url 'animals:list' %}" 
+           class="inline-flex items-center text-cyan-800 hover:text-cyan-600 font-medium">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Back to All Animals
+        </a>
+    </div>
 </div>
+
+<!-- Add Font Awesome for icons -->
+<style>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+</style>
 {% endblock %}
