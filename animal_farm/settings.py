@@ -79,7 +79,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 
 # Email requirements
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
@@ -98,7 +98,7 @@ SITE_ID = 1
 # Email Backend (Console for Development)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
+# ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
 
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomSignupForm',
