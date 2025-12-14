@@ -135,6 +135,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'animals.context_processor.categories_context',
+                'payments.context_processor.stripe_public_key',
             ],
         },
     },
