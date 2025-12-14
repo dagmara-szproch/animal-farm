@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'accounts',
     'animals',
+    'payments',
 ]
 
 
