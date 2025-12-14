@@ -104,7 +104,7 @@ SITE_ID = 1
 # Email Backend (Console for Development)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
+ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
 
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomSignupForm',
