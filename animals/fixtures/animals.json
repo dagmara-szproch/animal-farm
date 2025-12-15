@@ -3,47 +3,250 @@
     "model": "animals.animal",
     "pk": 1,
     "fields": {
-      "category": 1,
-      "name": "Lucky",
-      "slug": "lucky",
-      "species": "Horse",
-      "breed": "Thoroughbred",
-      "description": "Lucky is a gentle horse who loves carrots.",
-      "story": "Lucky was rescued after being abandoned by his previous owner. He is very friendly and enjoys long walks.",
+      "category": 6,
+      "name": "Aria",
+      "species": "Parrot",
+      "breed": "Blue-and-yellow macaw",
+      "description": "A colourful parrot with a sharp mind and strong character.",
+      "story": "Aria was rescued after spending many years living alone in a small cage with very little stimulation or social contact. Parrots are highly intelligent birds, and prolonged isolation often leads to anxiety and behavioural issues. When Aria arrived at the sanctuary, she was nervous, vocal, and unsure how to interact with people or toys. With time, patience, and routine, she slowly began to explore her surroundings.\n\nAria now lives in a spacious indoor aviary where she can climb, stretch her wings, and engage with enrichment items. Her care involves a varied diet of fresh fruit, vegetables, and specialist pellets. Mental stimulation is essential, as boredom can quickly lead to stress. During colder months, indoor heating and lighting must be kept consistent.\n\nCaring for Aria costs approximately £45 per month, mainly covering food, enrichment, and electricity. Additional costs include veterinary check-ups and replacement toys. Donations help ensure Aria receives both physical care and emotional wellbeing. Your support gives her a safe, enriched life after years of neglect.",
       "is_active": true,
       "date_deceased": null,
       "created_at": "2025-12-11T00:00:00Z",
       "updated_at": "2025-12-11T00:00:00Z"
     }
   },
+
   {
     "model": "animals.animal",
     "pk": 2,
     "fields": {
-      "category": 2,
-      "name": "Spiky",
-      "slug": "spiky",
-      "species": "Goat",
-      "breed": "Pygmy",
-      "description": "Spiky loves to play in the field and is very curious.",
-      "story": "Spiky was rescued from a smallholding where he had little care. He is now thriving and friendly.",
+      "category": 4,
+      "name": "Red",
+      "species": "Fox",
+      "breed": null,
+      "description": "A wild fox recovering from serious injuries.",
+      "story": "Red was found injured near a busy road, likely after being struck by a vehicle. He arrived at the sanctuary frightened, dehydrated, and in need of urgent veterinary treatment. Wildlife rescues like Red must be handled carefully, as stress can significantly impact recovery. His initial care involved medication, wound management, and strict rest with minimal human contact.\n\nAs Red began to heal, he was moved to a secure outdoor enclosure designed to resemble a natural habitat. His diet includes raw meat and supplements to support healing and maintain strength. Regular monitoring is essential to ensure his injuries do not worsen. Enclosure maintenance and security are ongoing responsibilities.\n\nRed’s care costs around £60 per month, covering food, veterinary care, and enclosure upkeep. Unexpected medical needs can increase this significantly. Donations allow us to continue providing specialist wildlife rehabilitation. Your support helps Red recover with dignity and minimal human interference.",
       "is_active": true,
       "date_deceased": null,
       "created_at": "2025-12-11T00:00:00Z",
       "updated_at": "2025-12-11T00:00:00Z"
     }
   },
+
   {
     "model": "animals.animal",
     "pk": 3,
     "fields": {
+      "category": 4,
+      "name": "Acorn",
+      "species": "Squirrel",
+      "breed": null,
+      "description": "An energetic squirrel rescued as a tiny orphan.",
+      "story": "Acorn was rescued as a very young orphan after his nest was destroyed, leaving him unable to survive alone. At that age, squirrels require constant warmth and frequent feeding throughout the day and night. His early care was intensive and required dedicated monitoring. Without intervention, Acorn would not have survived.\n\nAs he grew stronger, Acorn was gradually introduced to a secure enclosure with climbing structures and natural materials. His diet includes nuts, seeds, fresh vegetables, and supplements to support healthy development. Squirrels are highly active animals and require constant enrichment to prevent stress and boredom.\n\nCaring for Acorn costs approximately £30 per month. This covers food, enclosure maintenance, and enrichment. Donations help ensure orphaned wildlife receive the specialist care they need. Your contribution supports Acorn’s future and helps other vulnerable animals.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 4,
+    "fields": {
       "category": 3,
-      "name": "Clucky",
-      "slug": "clucky",
-      "species": "Chicken",
-      "breed": "Rhode Island Red",
-      "description": "Clucky is a friendly hen who loves visitors.",
-      "story": "Clucky was found wandering near a farm. She is very social and lays plenty of eggs.",
+      "name": "Bubbles",
+      "species": "Fish",
+      "breed": "Freshwater",
+      "description": "A peaceful fish living in a heated aquarium.",
+      "story": "Bubbles was surrendered when his previous owner could no longer maintain a suitable aquarium environment. Fish are often misunderstood, and poor water quality can quickly lead to illness and stress. When Bubbles arrived, his health had already begun to decline.\n\nHe now lives in a carefully maintained heated aquarium with proper filtration and regular water testing. Stable temperatures and clean water are essential for his wellbeing. Equipment such as heaters and filters must run continuously, increasing electricity usage.\n\nCaring for Bubbles costs around £20 per month, primarily for electricity, food, and water treatments. Equipment maintenance and replacement add to these costs over time. Donations help ensure aquatic animals receive proper, consistent care. Your support helps maintain a safe and stable environment for Bubbles.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 5,
+    "fields": {
+      "category": 4,
+      "name": "Willow",
+      "species": "Hare",
+      "breed": null,
+      "description": "A shy hare rescued from farmland.",
+      "story": "Willow was found injured during harvesting season, a common danger for wildlife living near farmland. She arrived frightened and in pain, requiring immediate veterinary assessment. Hares are naturally timid animals, and stress can greatly affect their recovery.\n\nWillow now lives in a quiet enclosure designed to minimise noise and human disturbance. Her care includes fresh forage, supplementary feeding, and regular health monitoring. Providing a calm environment is essential to her wellbeing.\n\nMonthly care costs are around £35, covering food, shelter, and veterinary oversight. Donations help create safe recovery spaces for injured wildlife. Your support allows animals like Willow to heal in peace.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 6,
+    "fields": {
+      "category": 3,
+      "name": "Thumper",
+      "species": "Rabbit",
+      "breed": "Domestic rabbit",
+      "description": "A friendly rabbit who enjoys gentle attention.",
+      "story": "Thumper was abandoned outdoors without proper shelter or protection from the elements. Rabbits are often misunderstood pets, and many are surrendered due to lack of knowledge about their needs. When rescued, Thumper was underweight and anxious.\n\nHe now lives in a spacious enclosure with room to exercise and explore. His diet includes unlimited hay, fresh vegetables, and clean water. Regular veterinary care is essential, particularly for dental health.\n\nThumper’s care costs approximately £25 per month. This covers food, bedding, and routine health checks. Donations help ensure rabbits like Thumper receive the care and attention they deserve.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 7,
+    "fields": {
+      "category": 3,
+      "name": "Pebble",
+      "species": "Guinea Pig",
+      "breed": null,
+      "description": "A gentle guinea pig rescued from neglect.",
+      "story": "Pebble was surrendered after suffering from neglect and an unsuitable diet. Guinea pigs require a constant supply of vitamin C, which their bodies cannot produce naturally. Without it, they quickly become unwell.\n\nPebble now receives a balanced diet of hay, fresh vegetables, and supplements. Clean bedding and a warm, draught-free environment are essential for his comfort. Regular checks help prevent common health issues.\n\nMonthly care costs are around £20. Donations support food, bedding, and health monitoring. Your contribution helps ensure small animals receive consistent and appropriate care.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 8,
+    "fields": {
+      "category": 4,
+      "name": "Spiky",
+      "species": "Hedgehog",
+      "breed": null,
+      "description": "A hedgehog recovering from malnutrition.",
+      "story": "Spiky was found severely underweight and struggling to survive. Hedgehogs are increasingly vulnerable due to habitat loss and food shortages. When rescued, Spiky required immediate warmth and specialist feeding.\n\nHe now lives indoors during colder months, where temperatures can be carefully controlled. His care includes specialist food, heating, and regular veterinary checks. Without warmth, hedgehogs can quickly deteriorate.\n\nSpiky’s care costs approximately £40 per month. Much of this covers heating and specialist food. Donations help protect vulnerable hedgehogs from harsh conditions and starvation.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 9,
+    "fields": {
+      "category": 1,
+      "name": "Bruno",
+      "species": "Horse",
+      "breed": "Belgian Draught",
+      "description": "A gentle giant enjoying a peaceful retirement.",
+      "story": "Bruno spent many years performing heavy labour before being surrendered. Large working horses often suffer from joint strain and long-term physical stress. When Bruno arrived, he required rest, nutritional support, and careful monitoring.\n\nHe now enjoys a quieter life with regular turnout and a carefully managed diet. Farrier visits are essential to keep his hooves healthy. Veterinary care helps manage age-related and work-related conditions.\n\nCaring for Bruno costs around £180 per month. This covers feed, bedding, farrier services, and veterinary care. Donations help provide Bruno with a comfortable and peaceful retirement.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 10,
+    "fields": {
+      "category": 1,
+      "name": "Poppy & Pickle",
+      "species": "Pig",
+      "breed": "Domestic pigs",
+      "description": "An inseparable pair of rescued pigs.",
+      "story": "Poppy and Pickle were rescued together and have remained inseparable ever since. Separating bonded pigs can cause significant distress, so they are cared for as a pair. They arrived under-socialised and unfamiliar with safe handling.\n\nTheir care includes strong fencing, secure shelter, and a specialised diet. Regular hoof care and veterinary checks are essential. Maintaining their enclosure requires constant upkeep.\n\nTheir combined monthly care costs are around £120. Donations help keep this bonded pair safe, comfortable, and together. Your support ensures their long-term wellbeing.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 11,
+    "fields": {
+      "category": 1,
+      "name": "Bella",
+      "species": "Cow",
+      "breed": "Simmental",
+      "description": "A calm cow with distinctive colouring.",
+      "story": "Bella was rescued from poor living conditions where her basic needs were not met. Large grazing animals require consistent access to food, shelter, and veterinary care. When Bella arrived, she was nervous and underweight.\n\nShe now lives in a safe pasture with appropriate shelter and regular health monitoring. Her care includes hay, pasture management, and routine veterinary checks. Seasonal changes affect feeding and housing needs.\n\nMonthly costs for Bella are around £150. Donations support food, shelter, and medical care. Your contribution helps provide Bella with long-term stability.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 12,
+    "fields": {
+      "category": 1,
+      "name": "Daisy",
+      "species": "Cow",
+      "breed": "Holstein",
+      "description": "A black and white cow rescued from neglect.",
+      "story": "Daisy arrived at the sanctuary underweight and wary of human contact. She required time to adjust to a safe and predictable environment. Gradually, she began to regain strength and confidence.\n\nHer care includes a balanced diet, access to grazing, and regular veterinary oversight. Shelter and pasture maintenance are essential year-round. Large animals like Daisy require significant ongoing resources.\n\nMonthly care costs are approximately £150. Donations help cover feed, shelter, and healthcare. Your support ensures Daisy can live comfortably and safely.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 13,
+    "fields": {
+      "category": 5,
+      "name": "Atlas",
+      "species": "Tortoise",
+      "breed": "Testudo graeca",
+      "description": "A Mediterranean tortoise requiring specialist heating.",
+      "story": "Atlas was rescued after years of being kept without proper heating or UV lighting. Mediterranean tortoises are often misunderstood, particularly in the UK climate. When Atlas arrived, signs of long-term calcium deficiency were evident.\n\nHe now lives in a heated enclosure with UVB lighting that mimics natural conditions. His care includes a strict diet and regular health monitoring. Electricity usage is high due to heating and lighting requirements.\n\nAtlas’s care costs around £55 per month. Donations help cover electricity, food, and specialist veterinary care. Your support ensures Atlas can live comfortably despite his early neglect.",
+      "is_active": true,"date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 14,
+    "fields": {
+      "category": 5,
+      "name": "Sandy",
+      "species": "Tortoise",
+      "breed": "Sulcata",
+      "description": "A sulcata tortoise with high heating needs.",
+      "story": "Sandy was rescued from unsuitable housing that could not meet the needs of a sulcata tortoise. This species originates from extremely hot climates and struggles in the UK without constant heating. On arrival, Sandy required immediate environmental adjustments.\n\nShe now lives in a specially heated enclosure with strong UVB lighting. Electricity costs are significant throughout the year. Her diet and space requirements will increase as she grows.\n\nMonthly care costs exceed £70. Donations help maintain stable temperatures and proper nutrition. Your support ensures Sandy’s long-term survival.",
+      "is_active": true,
+      "date_deceased": null,
+      "created_at": "2025-12-11T00:00:00Z",
+      "updated_at": "2025-12-11T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "animals.animal",
+    "pk": 15,
+    "fields": {
+      "category": 5,
+      "name": "Dune",
+      "species": "Tortoise",
+      "breed": "Sulcata",
+      "description": "A second sulcata tortoise needing intensive care.",
+      "story": "Dune was rescued alongside Sandy and shares similar long-term care requirements. Sulcata tortoises can grow very large and require lifelong specialist care. Without proper heating, their health can quickly decline.\n\nDune lives in a controlled environment with constant warmth and UV lighting. Electricity usage is unavoidable and ongoing. Regular checks help prevent hidden health issues.\n\nCaring for Dune costs around £70 per month. Donations help cover heating, lighting, and food. Your support provides security and comfort for Dune’s future.",
       "is_active": true,
       "date_deceased": null,
       "created_at": "2025-12-11T00:00:00Z",

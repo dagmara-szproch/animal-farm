@@ -3,27 +3,54 @@
     "model": "animals.category",
     "pk": 1,
     "fields": {
-      "name": "Horses",
-      "slug": "horses",
-      "description": "All the rescued horses at the farm."
+      "name": "Farm Animals",
+      "slug": "farm-animals",
+      "description": "Large domestic animals traditionally kept on farms, including grazing and working animals rescued or cared for at the sanctuary."
     }
   },
   {
     "model": "animals.category",
     "pk": 2,
     "fields": {
-      "name": "Goats",
-      "slug": "goats",
-      "description": "Friendly and playful goats."
+      "name": "Poultry",
+      "slug": "poultry",
+      "description": "Domesticated birds commonly kept on farms for eggs, breeding, or companionship."
     }
   },
   {
     "model": "animals.category",
     "pk": 3,
     "fields": {
-      "name": "Poultry",
-      "slug": "poultry",
-      "description": "Chickens, ducks and other birds."
+      "name": "Small Pets",
+      "slug": "small-pets",
+      "description": "Animals often kept in homes as companions, including small mammals and domestic pets."
+    }
+  },
+  {
+    "model": "animals.category",
+    "pk": 4,
+    "fields": {
+      "name": "Wildlife",
+      "slug": "wildlife",
+      "description": "Native and wild animals rescued from injury, abandonment, or unsafe environments."
+    }
+  },
+  {
+    "model": "animals.category",
+    "pk": 5,
+    "fields": {
+      "name": "Reptiles",
+      "slug": "reptiles",
+      "description": "Cold-blooded animals that often require specialist care, typically rescued from unsuitable living conditions."
+    }
+  },
+  {
+    "model": "animals.category",
+    "pk": 6,
+    "fields": {
+      "name": "Birds",
+      "slug": "birds",
+      "description": "Non-poultry birds rescued or cared for at the sanctuary, including exotic and companion species."
     }
   }
 ]
