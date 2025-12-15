@@ -5,13 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}AnimalRescue{% endblock %}</title>
 
+    <!-- Meta Description Block -->
+    {% block meta_description %}
+    <meta name="description" content="Rescue and support animals in need through donations and volunteering">
+    {% endblock %}
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- STRIPE.JS -->
     <script src="https://js.stripe.com/v3/"></script>
+
+    <title>{% block title %}AnimalRescue{% endblock %}</title>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen bg-lime-50/50">
 
 <!-- Navbar Top -->
 {% include 'includes/nav_main.html' %}

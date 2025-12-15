@@ -1,10 +1,16 @@
 {% load static %}
 
-<div class="relative h-96 bg-cover bg-center" 
-     style="background-image: url('{% static "./images/hero_banner.webp" %}');">
-    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-        <h1 class="text-4xl md:text-6xl text-white font-bold text-center">
-            Welcome to AnimalRescue
-        </h1>
+<!-- Hero Image Only - No Text -->
+<div class="relative">
+    <!-- Responsive container with controlled height -->
+    <div class="relative h-[30vh] sm:h-[35vh] md:h-[40vh] lg:h-80 xl:h-96 overflow-hidden">
+        <!-- Optimized responsive image -->
+        <img src="{% static './images/hero_banner.webp' %}" 
+             alt="AnimalRescue - Helping animals in need"
+             class="w-full h-full object-cover object-center"
+             loading="eager">
+        
+        <!-- Optional subtle overlay for better readability of text that might be on top -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
     </div>
 </div>

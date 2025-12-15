@@ -1,12 +1,14 @@
 <!-- Mobile Navbar -->
-<nav class="md:hidden bg-white shadow">
+<nav class="md:hidden bg-white shadow-sm border-b border-lime-100">
     <div class="flex items-center justify-between p-4">
-        <!-- Logo -->
-        <a href="{% url 'home' %}" class="text-xl font-bold text-cyan-800">AnimalRescue</a>
+        <!-- Logo with icon -->
+        <a href="{% url 'home' %}" class="text-xl font-bold text-cyan-800 flex items-center">
+            <i class="fas fa-paw mr-2"></i>AnimalRescue
+        </a>
 
-        <!-- Burger button -->
-        <button id="mobile-menu-btn" class="text-cyan-800 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Burger button with animation -->
+        <button id="mobile-menu-btn" class="text-cyan-800 focus:outline-none p-2 rounded-lg hover:bg-lime-50 transition-colors duration-200" aria-label="Toggle menu">
+            <svg class="w-6 h-6 transition-transform duration-200" id="burger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
@@ -14,52 +16,78 @@
     </div>
 
     <!-- Mobile dropdown menu -->
-    <div class="hidden" id="mobile-menu">
-        <div class="px-4 pb-4 space-y-3 bg-lime-100">
+    <div class="hidden bg-white border-t border-lime-100 shadow-lg" id="mobile-menu">
+        <div class="px-4 pb-4 space-y-3">
 
-            <!-- Search bar -->
-            <input type="text" placeholder="Search animals..." 
-                   class="w-full px-3 py-2 mt-2 border rounded text-base border-lime-300 focus:border-lime-500 focus:ring focus:ring-lime-200">
+            <!-- Search bar with icon -->
+            <div class="pt-3">
+                <div class="relative">
+                    <input type="text" 
+                           placeholder="Search animals..." 
+                           class="w-full px-4 py-3 pl-12 border border-lime-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:border-cyan-400">
+                    <i class="fas fa-search absolute left-4 top-3.5 text-lime-500"></i>
+                </div>
+            </div>
 
-            <!-- Categories -->
-            <div class="pt-2 space-y-1">
-                {% if categories %}
+            <!-- Categories Section -->
+            {% if categories %}
+            <div class="pt-3">
+                <h3 class="text-sm font-semibold text-lime-700 uppercase tracking-wider mb-2 px-1">Categories</h3>
+                <div class="space-y-1">
                     {% for category in categories %}
                         <a href="{% url 'animals:by_category' category.slug %}" 
-                           class="block text-lime-950 font-medium hover:underline">{{ category.name }}</a>
+                           class="block text-lime-950 hover:text-cyan-800 font-medium py-2 px-3 rounded-lg hover:bg-lime-50">{{ category.name }}</a>
                     {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Volunteer button -->
+            <div class="pt-3">
+                <a href="#" class="block bg-cyan-800 text-white px-4 py-3 rounded-lg text-center font-medium hover:bg-cyan-700">Volunteer with us</a>
+            </div>
+
+            <!-- Auth links -->
+            <div class="pt-3 border-t border-lime-200">
+                {% if request.user.is_authenticated %}
+                    <!-- User greeting -->
+                    <div class="px-3 py-2 mb-2 bg-lime-50 rounded-lg">
+                        <p class="text-sm text-lime-700">Welcome back</p>
+                        <p class="font-medium text-lime-950">{{ request.user.get_short_name|default:request.user.username }}</p>
+                    </div>
+                    
+                    <!-- User links -->
+                    <div class="space-y-1">
+                        {% if user.role == 'donor' %}
+                            <a href="#" class="block text-lime-900 hover:text-cyan-800 font-medium py-2 px-3 rounded-lg hover:bg-lime-100">Dashboard</a>
+                        {% elif user.role == 'volunteer' and user.is_approved %}
+                            <a href="#" class="block text-lime-900 hover:text-cyan-800 font-medium py-2 px-3 rounded-lg hover:bg-lime-50">Volunteer Dashboard</a>
+                        {% elif user.role == 'volunteer' and not user.is_approved %}
+                            <a href="#" class="block text-yellow-700 hover:text-yellow-600 font-medium py-2 px-3 rounded-lg hover:bg-yellow-50">Pending Approval</a>
+                        {% endif %}
+
+                        <a href="{% url 'account_logout' %}" class="block text-lime-900 hover:text-cyan-800 font-medium py-2 px-3 rounded-lg hover:bg-cyan-50">Logout</a>
+                    </div>
                 {% else %}
-                    <!-- Placeholder categories -->
-                    <a href="#" class="block text-lime-950 font-medium hover:underline">Cats</a>
-                    <a href="#" class="block text-lime-950 font-medium hover:underline">Dogs</a>
-                    <a href="#" class="block text-lime-950 font-medium hover:underline">Small Animals</a>
+                    <!-- Guest links -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="{% url 'account_login' %}" 
+                           class="block text-lime-900 hover:text-cyan-800 font-medium py-3 text-center rounded-lg border border-lime-300 hover:bg-lime-50">
+                            Login
+                        </a>
+                        <a href="{% url 'account_signup' %}" 
+                           class="block bg-cyan-800 text-white font-medium py-3 text-center rounded-lg hover:bg-cyan-700">
+                            Register
+                        </a>
+                    </div>
                 {% endif %}
             </div>
 
-            <!-- Volunteer button -->
-            <a href="#" class="block bg-cyan-800 text-lime-50 px-3 py-2 rounded text-center mt-2 hover:bg-cyan-700">
-                Volunteer with us
-            </a>
-
-            <!-- Auth links -->
-            <div class="pt-2 border-t mt-2 space-y-1">
-                {% if request.user.is_authenticated %}
-                    <span class="block mb-1 text-lime-950">Welcome, {{ request.user.username }}</span>
-                    
-                    {% if user.role == 'donor' %}
-                        <a href="#" class="block text-lime-900 hover:underline">Donor Dashboard</a>
-                    {% elif user.role == 'volunteer' and user.is_approved %}
-                        <a href="#" class="block text-lime-900 hover:underline">Volunteer Dashboard</a>
-                    {% elif user.role == 'volunteer' and not user.is_approved %}
-                        <a href="#" class="block text-lime-900 hover:underline">Pending Approval</a>
-                    {% endif %}
-                    
-                    <a href="#" class="block text-lime-900 hover:underline">Profile</a>
-                    <a href="{% url 'account_logout' %}" class="block text-lime-900 hover:underline">Logout</a>
-                {% else %}
-                    <a href="{% url 'account_signup' %}" class="block text-lime-900 hover:underline">Register</a>
-                    <a href="{% url 'account_login' %}" class="block text-lime-900 hover:underline">Login</a>
-                {% endif %}
+            <!-- All Animals link -->
+            <div class="pt-3 border-t border-lime-200">
+                <a href="{% url 'animals:list' %}" 
+                   class="block text-center text-cyan-800 hover:text-cyan-700 font-medium py-3 rounded-lg hover:bg-cyan-50">View All Animals
+                </a>
             </div>
 
         </div>
@@ -69,5 +97,19 @@
 <script>
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    const icon = document.getElementById('burger-icon');
+    
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        // Optional: Animate the burger icon
+        icon.classList.toggle('rotate-90');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !btn.contains(e.target) && !menu.classList.contains('hidden')) {
+            menu.classList.add('hidden');
+            icon.classList.remove('rotate-90');
+        }
+    });
 </script>

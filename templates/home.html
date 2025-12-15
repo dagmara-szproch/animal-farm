@@ -6,5 +6,109 @@
 {% endblock %}
 
 {% block content %}
-<!-- your content here -->
+<div class="max-w-4xl mx-auto px-4 py-8 md:py-12">
+    
+    <!-- Main welcome section -->
+    <div class="mb-12 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-cyan-800 mb-6">
+            Welcome to Our Animal Rescue Farm
+        </h1>
+        <p class="text-lg text-lime-950 leading-relaxed">
+            Welcome to our animal rescue farm, a small sanctuary built on compassion, patience, and second chances. 
+            We are a family-run rescue dedicated to caring for animals who have been abandoned, neglected, injured, 
+            or simply had nowhere else to go. Every animal here has a story, and every story matters.
+        </p>
+    </div>
+    
+    <!-- Two column layout for sections -->
+    <div class="space-y-12">
+        
+        <!-- How It All Began -->
+        <div class="bg-lime-50 p-6 md:p-8 rounded-xl border border-lime-200">
+            <h2 class="text-2xl font-bold text-cyan-800 mb-4">How It All Began</h2>
+            <div class="text-lime-950 space-y-4">
+                <p>
+                    Everything started over ten years ago, when our daughter came home carrying a small bird 
+                    she had found in the woods with a broken wing. We didn't plan to run a rescue back then — 
+                    we simply wanted to help one animal in need. That single act of kindness led to another, 
+                    and then another.
+                </p>
+                <p>
+                    Over time, our home and land slowly transformed into a place of safety for animals others 
+                    could not care for. What began with one injured bird grew into a lifelong commitment. 
+                    Today, our sanctuary is home to rescued farm animals, wildlife, reptiles, birds, and small pets. 
+                    Each arrival reminds us why we started and why this work continues to matter.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Life at the Sanctuary -->
+        <div class="bg-lime-50 p-6 md:p-8 rounded-xl border border-lime-200">
+            <h2 class="text-2xl font-bold text-cyan-800 mb-4">Life at the Sanctuary</h2>
+            <div class="text-lime-950 space-y-4">
+                <p>
+                    Our animals receive daily care tailored to their individual needs. Some require specialist diets, 
+                    others need heated enclosures, ongoing veterinary treatment, or a calm environment away from stress. 
+                    We focus not only on physical recovery but also on emotional wellbeing, allowing animals the time 
+                    and space they need to feel safe again.
+                </p>
+                <p>
+                    Because many of our residents have health conditions or past trauma, not all animals can be 
+                    handled or visited closely. Their wellbeing always comes first, even when that means limiting interaction.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Visiting Us -->
+        <div class="bg-lime-50 p-6 md:p-8 rounded-xl border border-lime-200">
+            <h2 class="text-2xl font-bold text-cyan-800 mb-4">Visiting Us</h2>
+            <div class="text-lime-950 space-y-4">
+                <p>
+                    We are open every day, but visits are by confirmation only. This helps us maintain a calm and 
+                    safe environment for the animals and allows us to plan care routines properly. If you would 
+                    like to visit, please contact us in advance to arrange a suitable time.
+                </p>
+                <p>
+                    If you are planning to visit as part of a large group, school, or organisation, we kindly ask 
+                    that you get in touch beforehand so we can discuss availability and ensure the visit is suitable 
+                    for both visitors and animals.
+                </p>
+            </div>
+        </div>
+        
+        <!-- How Donations Work -->
+        <div class="bg-lime-50 p-6 md:p-8 rounded-xl border border-lime-200">
+            <h2 class="text-2xl font-bold text-cyan-800 mb-4">How Donations Work</h2>
+            <div class="text-lime-950 space-y-4">
+                <p>
+                    Our sanctuary is entirely supported by donations. To donate, simply choose an animal you feel 
+                    connected to. Each donation supports the specific animal you select, helping to cover food, 
+                    heating, electricity, veterinary care, and ongoing maintenance.
+                </p>
+                <p>
+                    By donating to a particular animal, you are directly supporting their individual needs and 
+                    long-term care. This approach allows transparency and ensures every contribution makes a real difference.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Thank You section with CTA -->
+        <div class="text-center bg-gradient-to-br from-cyan-50 to-lime-50 p-8 rounded-xl border border-cyan-200">
+            <h2 class="text-2xl font-bold text-cyan-800 mb-6">Thank You for Supporting Us</h2>
+            <p class="text-lime-950 mb-8 max-w-2xl mx-auto">
+                Every donation, visit, and message of support helps us continue this work. Your kindness allows 
+                us to give animals the safety, care, and dignity they deserve. Thank you for being part of our 
+                journey and for helping us give these animals a second chance.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'animals:list' %}" 
+                   class="bg-cyan-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-cyan-700 transition-colors duration-200">
+                    Meet Our Animals
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
 {% endblock %}
