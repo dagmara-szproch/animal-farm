@@ -6,38 +6,66 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold mb-6 bg-lime-100 p-10 rounded text-center">
-    {% if view.kwargs.slug %}
-        {{ view.kwargs.slug|title }}
-    {% else %}
-        All Animals
-    {% endif %}
-</h1>
-
-<div class="flex flex-wrap justify-center gap-6">
-    {% for animal in animals %}
-        <div class="bg-white rounded shadow w-64">
-            <a href="{% url 'animals:detail' animal.slug %}">
-                <img src="{{ animal.image_or_placeholder }}" alt="{{ animal.name }}" class="w-full h-48 object-cover">
-                <div class="p-2">
-                    <h2>{{ animal.name }}</h2>
-                    <p>{{ animal.species }}</p>
+<div class="max-w-7xl mx-auto px-4 py-8">
+    
+    <!-- Page header -->
+    <div class="mb-10 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-cyan-800 mb-4">
+            {% if view.kwargs.slug %}
+                {{ view.kwargs.slug|title }}
+            {% else %}
+                All Animals
+            {% endif %}
+        </h1>
+        <p class="text-lime-700">
+            Meet our rescued residents - each one with a unique story of hope and recovery
+        </p>
+    </div>
+    
+    <!-- Animal grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-12">
+        {% for animal in animals %}
+            <a href="{% url 'animals:detail' animal.slug %}" 
+               class="group bg-white rounded-xl shadow-sm border border-lime-100 overflow-hidden hover:shadow-lg hover:border-lime-200 transition-all duration-200">
+                
+                <!-- Image container -->
+                <div class="h-48 md:h-56 overflow-hidden">
+                    <img src="{{ animal.image_or_placeholder }}" 
+                         alt="{{ animal.name }}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
+                
+                <!-- Animal info -->
+                <div class="p-4">
+                    <h3 class="font-bold text-lg text-cyan-800 group-hover:text-cyan-700 transition-colors">
+                        {{ animal.name }}
+                    </h3>
+                    <p class="text-lime-700 text-sm">{{ animal.species }}</p>
+                    
+                    {% if animal.category %}
+                        <div class="inline-block mt-2 px-2 py-1 bg-lime-100 text-lime-800 text-xs rounded-full">
+                            {{ animal.category.name }}
+                        </div>
+                    {% endif %}
+                </div>
+                
             </a>
-        </div>
-    {% empty %}
-        <p>No animals found in this category.</p>
-    {% endfor %}
-</div>
-
-{% if is_paginated %}
-<div class="mt-6 flex justify-center space-x-2">
-    {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-1 bg-gray-200 rounded">Previous</a>
+        {% empty %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-lg text-lime-700">No animals found in this category.</p>
+                <a href="{% url 'animals:list' %}" class="text-cyan-800 hover:text-cyan-700 mt-4 inline-block">
+                    ← View all animals
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Simple message when you have many animals -->
+    {% if animals|length >= 15 %}
+    <div class="text-center text-sm text-lime-600 mt-8">
+        Showing all {{ animals|length }} animals
+    </div>
     {% endif %}
-    {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-1 bg-gray-200 rounded">Next</a>
-    {% endif %}
+    
 </div>
-{% endif %}
 {% endblock %}

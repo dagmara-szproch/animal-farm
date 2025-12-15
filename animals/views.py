@@ -13,7 +13,6 @@ class AnimalListView(ListView):
     model = Animal
     template_name = 'animals/animal_list.html'
     context_object_name = 'animals'
-    paginate_by = 12
 
     def get_queryset(self):
         qs = Animal.objects.filter(is_active=True).select_related('category')
