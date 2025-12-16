@@ -1,43 +1,134 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<h1>Dashboard Test</h1>
+<div class="max-w-6xl mx-auto p-6">
+    <!-- Dashboard Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-cyan-800">My Donation Dashboard</h1>
+        <p class="text-cyan-600 mt-2">See your impact on rescued animals</p>
+    </div>
 
-<p>Welcome {{ user.username }}</p>
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-lime-50 p-6 rounded-xl shadow border border-lime-200">
+            <p class="text-sm text-cyan-700">Total Donated</p>
+            <p class="text-2xl font-bold text-cyan-800">£{{ total_donated }}</p>
+        </div>
+        <div class="bg-cyan-50 p-6 rounded-xl shadow border border-cyan-200">
+            <p class="text-sm text-cyan-700">Total Donations</p>
+            <p class="text-2xl font-bold text-cyan-800">{{ total_donations }}</p>
+        </div>
+        <div class="bg-cyan-50 p-6 rounded-xl shadow border border-cyan-200">
+            <p class="text-sm text-cyan-700">Animals Supported</p>
+            <p class="text-2xl font-bold text-cyan-800">{{ animal_stats|length }}</p>
+        </div>
+    </div>
 
-<h2>Stats</h2>
-<ul>
-    <li>Total Donated: £{{ total_donated }}</li>
-    <li>Total Donations: {{ total_donations }}</li>
-    <li>Animals Supported: {{ animal_stats|length }}</li>
-</ul>
+    <!-- Animal support section-->
+    {% if animal_stats %}
+    <div class="mb-8">
+        <h2 class="text-xl font-bold text-cyan-800 mb-4">Your Animal Impact</h2>
+        <p class="text-cyan-600 mb-6">See how you've helped individual animals</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for stat in animal_stats %}
+            <div class="bg-white rounded-xl shadow border border-lime-100 overflow-hidden hover:shadow-md transition">
+                <!-- Animal Image -->
+                <div class="h-48 overflow-hidden">
+                    <img src="{{ stat.animal.image_or_placeholder }}" 
+                         alt="{{ stat.animal.name }}"
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                
+                <!-- Animal Info -->
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="font-bold text-cyan-800 text-lg">{{ stat.animal.name }}</h3>
+                            <p class="text-sm text-cyan-600">{{ stat.animal.species }}</p>
+                        </div>
+                        {% if not stat.animal.is_active %}
+                        <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">
+                             Remembered
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Donation Stats -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-lime-50 rounded-lg">
+                            <p class="text-sm text-cyan-700">Times donated</p>
+                            <p class="font-bold text-cyan-800">{{ stat.donation_count }}</p>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-cyan-50 rounded-lg">
+                            <p class="text-sm text-cyan-700">Total contributed</p>
+                            <p class="font-bold text-cyan-800">£{{ stat.total_donated }}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="mt-4 flex space-x-3">
+                        <a href="{% url 'animals:detail' stat.animal.slug %}"
+                           class="flex-1 text-center bg-cyan-800 hover:bg-cyan-700 text-white font-medium py-2 px-4 rounded-lg transition text-sm">
+                            Visit {{ stat.animal.name }}
+                        </a>
+                        <button onclick="donateToAnimal('{{ stat.animal.slug }}')"
+                                class="text-cyan-700 hover:text-cyan-800 border border-cyan-200 rounded-lg px-4 py-2 text-sm">
+                                Donate Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 
-<h2>Animal Stats</h2>
-{% if animal_stats %}
-    <ul>
-    {% for stat in animal_stats %}
-        <li>
-            {{ stat.animal.name }} ({{ stat.animal.species }}):
-            {{ stat.donation_count }} donations, £{{ stat.total_donated }} total
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No animal donations yet</p>
-{% endif %}
+    <!-- Recent Donations (Simplified) -->
+    <div class="bg-white rounded-xl shadow border border-lime-100 overflow-hidden">
+        <div class="px-6 py-4 border-b border-lime-100">
+            <h2 class="text-xl font-bold text-cyan-800">Recent Donations</h2>
+        </div>
+        
+        {% if donations %}
+        <div class="divide-y divide-lime-100">
+            {% for donation in donations %}
+            <div class="p-6 hover:bg-lime-50 transition">
+                <div class="flex justify-between">
+                    <div>
+                        <p class="font-bold text-cyan-800">£{{ donation.amount }}</p>
+                        <p class="text-sm text-gray-600">
+                            {{ donation.created_at|date:"d M Y" }}
+                            To {{ donation.animal.name }}
+                        </p>
+                        {% if donation.message %}
+                        <p class="text-gray-700 mt-2 italic text-sm">
+                            "{{ donation.message|truncatechars:60 }}"
+                        </p>
+                        {% endif %}
+                    </div>
+                    <!-- for future imolementaton: ger receipt -->
+                    <!-- <a href="#" class="text-cyan-700 text-sm">Receipt</a> -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-12">
+            <p class="text-gray-500">No donations yet</p>
+            <a href="{% url 'animals:list' %}" class="mt-4 inline-block bg-cyan-800 text-white py-2 px-6 rounded-lg">
+                Make your first donation
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
 
-<h2>Recent Donations</h2>
-{% if donations %}
-    <ul>
-    {% for donation in donations %}
-        <li>
-            £{{ donation.amount }} on {{ donation.created_at|date:"Y-m-d" }}
-            {% if donation.animal %}to {{ donation.animal.name }}{% endif %}
-            ({{ donation.status }})
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No donations yet</p>
-{% endif %}
+<script>
+function donateToAnimal(animalSlug) {
+    window.location.href = `/payments/donate/${animalSlug}/`;
+}
+</script>
 {% endblock %}
