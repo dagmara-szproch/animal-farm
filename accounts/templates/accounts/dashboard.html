@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Dashboard Test</h1>
+
+<p>Welcome {{ user.username }}</p>
+
+<h2>Stats</h2>
+<ul>
+    <li>Total Donated: £{{ total_donated }}</li>
+    <li>Total Donations: {{ total_donations }}</li>
+    <li>Animals Supported: {{ animal_stats|length }}</li>
+</ul>
+
+<h2>Animal Stats</h2>
+{% if animal_stats %}
+    <ul>
+    {% for stat in animal_stats %}
+        <li>
+            {{ stat.animal.name }} ({{ stat.animal.species }}):
+            {{ stat.donation_count }} donations, £{{ stat.total_donated }} total
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No animal donations yet</p>
+{% endif %}
+
+<h2>Recent Donations</h2>
+{% if donations %}
+    <ul>
+    {% for donation in donations %}
+        <li>
+            £{{ donation.amount }} on {{ donation.created_at|date:"Y-m-d" }}
+            {% if donation.animal %}to {{ donation.animal.name }}{% endif %}
+            ({{ donation.status }})
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No donations yet</p>
+{% endif %}
+{% endblock %}

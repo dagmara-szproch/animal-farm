@@ -25,7 +25,7 @@
                     <!-- Action links in a row -->
                     <div class="flex items-center space-x-5">
                         {% if user.role == 'donor' %}
-                            <a href="#" class="text-lime-900 hover:text-cyan-800">Dashboard</a>
+                            <a href="{% url 'accounts:dashboard' %}" class="text-lime-900 hover:text-cyan-800">Dashboard</a>
                         {% elif user.role == 'volunteer' and user.is_approved %}
                             <a href="#" class="text-lime-900 hover:text-cyan-800">Volunteer</a>
                         {% elif user.role == 'volunteer' and not user.is_approved %}
