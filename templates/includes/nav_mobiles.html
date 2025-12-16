@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between p-4">
         <!-- Logo with icon -->
         <a href="{% url 'home' %}" class="text-xl font-bold text-cyan-800 flex items-center">
-            <i class="fas fa-paw mr-2"></i>AnimalRescue
+            AnimalRescue
         </a>
 
         <!-- Burger button with animation -->
@@ -19,13 +19,22 @@
     <div class="hidden bg-white border-t border-lime-100 shadow-lg" id="mobile-menu">
         <div class="px-4 pb-4 space-y-3">
 
-            <!-- Search bar with icon -->
+            <!-- Search bar with button -->
             <div class="pt-3">
                 <div class="relative">
-                    <input type="text" 
-                           placeholder="Search animals..." 
-                           class="w-full px-4 py-3 pl-12 border border-lime-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:border-cyan-400">
-                    <i class="fas fa-search absolute left-4 top-3.5 text-lime-500"></i>
+                    <form method="GET" action="{% url 'animals:list' %}" class="flex">
+                        <input
+                            type="text"
+                            name="q"
+                            aria-label="Search animals"
+                            class="w-full max-w-md px-4 py-2 border rounded-l-lg text-base focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            placeholder="Search animals..."
+                            value="{{ request.GET.q }}">
+                        <button type="submit" 
+                                class="px-4 py-2 bg-cyan-600 text-white rounded-r-lg hover:bg-cyan-700">
+                                Search
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -59,7 +68,7 @@
                     <!-- User links -->
                     <div class="space-y-1">
                         {% if user.role == 'donor' %}
-                            <a href="#" class="block text-lime-900 hover:text-cyan-800 font-medium py-2 px-3 rounded-lg hover:bg-lime-100">Dashboard</a>
+                            <a href="{% url 'accounts:dashboard' %}" class="block text-lime-900 hover:text-cyan-800 font-medium py-2 px-3 rounded-lg hover:bg-lime-100">Dashboard</a>
                         {% elif user.role == 'volunteer' and user.is_approved %}
                             <a href="#" class="block text-lime-900 hover:text-cyan-800 font-medium py-2 px-3 rounded-lg hover:bg-lime-50">Volunteer Dashboard</a>
                         {% elif user.role == 'volunteer' and not user.is_approved %}
