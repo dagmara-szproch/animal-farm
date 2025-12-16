@@ -2,9 +2,6 @@
 
 {% block content %}
 <div class="max-w-md mx-auto my-12 p-8 bg-lime-50 rounded-xl shadow-lg text-center">
-    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-        <i class="fas fa-heart text-white text-3xl"></i>
-    </div>
     
     <h1 class="text-3xl font-bold text-cyan-800 mb-4">Thank You! ❤️</h1>
     
@@ -30,17 +27,6 @@
         </div>
         {% endif %}
     </div>
-    {% else %}
-    <div class="bg-white p-6 rounded-lg mb-6">
-        <p class="text-lg text-lime-950">
-            Thank you for your donation!
-        </p>
-        {% if donation_ref %}
-        <p class="text-gray-600 text-sm mt-2">
-            Reference: <strong>{{ donation_ref }}</strong>
-        </p>
-        {% endif %}
-    </div>
     {% endif %}
     
     <p class="text-lime-800 mb-8">
@@ -49,21 +35,26 @@
     </p>
     
     <div class="space-y-4">
+        <a href="{% url 'accounts:dashboard' %}" 
+           class="block border border-cyan-300 text-cyan-700 py-3 rounded-lg hover:bg-cyan-50 font-medium">
+           View Your Dashboard
+        </a>
+
         {% if animal %}
         <a href="{% url 'animals:detail' animal.slug %}" 
            class="block bg-cyan-800 text-white py-3 rounded-lg hover:bg-cyan-700 font-medium">
-            <i class="fas fa-paw mr-2"></i>Back to {{ animal.name }}
+            Back to {{ animal.name }}
         </a>
         {% endif %}
         
         <a href="{% url 'animals:list' %}" 
            class="block bg-lime-200 text-lime-950 py-3 rounded-lg hover:bg-lime-300 font-medium">
-            <i class="fas fa-heart mr-2"></i>Meet More Animals
+            Meet More Animals
         </a>
         
         <a href="{% url 'home' %}" 
            class="block border border-lime-300 text-lime-700 py-3 rounded-lg hover:bg-lime-50 font-medium">
-            <i class="fas fa-home mr-2"></i>Return Home
+            Return Home
         </a>
     </div>
 </div>
