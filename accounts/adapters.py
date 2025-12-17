@@ -1,13 +1,30 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+
 
 class CustomAccountAdapter(DefaultAccountAdapter):
-    """
-    FUTURE: Will implement role-based redirects.
-    For now, Django uses default behavior via LOGIN_REDIRECT_URL.
-    """
-    pass
+
+    def save_user(self, request, user, form, commit=True):
+        """
+        Saves a new user. The key fix: call parent FIRST, then set role.
+        """
+        # 1. Let allauth create the user with email/password
+        user = super().save_user(request, user, form, commit=False)
+
+        # 2. set custom fields
+        user.role = 'donor'
+        user.is_approved = True
+
+        if commit:
+            user.save()
+        return user
+
+    def get_login_redirect_url(self, request):
+        """
+        Simple redirect for now. Everyone goes to dashboard.
+        """
+        return reverse('accounts:dashboard')
+
 
 # class CustomAccountAdapter(DefaultAccountAdapter):
 #     def get_login_redirect_url(self, request):
