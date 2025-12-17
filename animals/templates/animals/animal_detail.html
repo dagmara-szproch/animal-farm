@@ -52,7 +52,7 @@
                 {% endif %}
             </div>
 
-            <!-- Donation Section - SIMPLE -->
+            <!-- Donation Section-->
             <div class="bg-lime-50 p-6 rounded-xl shadow border border-lime-200">
                 <h2 class="text-xl font-bold text-cyan-800 mb-4">Support {{ animal.name }}</h2>
                 
@@ -66,25 +66,6 @@
                        class="block w-full bg-cyan-800 hover:bg-cyan-700 text-white font-bold py-3 px-4 rounded-lg text-center transition">
                         💝 Donate to {{ animal.name }}
                     </a>
-                    
-                    <!-- Quick amount options -->
-                    <div class="text-center">
-                        <p class="text-gray-600 text-sm mb-2">Quick donate:</p>
-                        <div class="flex justify-center space-x-4">
-                            <a href="{% url 'payments:create_donation' animal.slug %}?amount=5" 
-                               class="text-cyan-700 hover:text-cyan-800 font-medium">
-                                £5
-                            </a>
-                            <a href="{% url 'payments:create_donation' animal.slug %}?amount=10" 
-                               class="text-cyan-700 hover:text-cyan-800 font-medium">
-                                £10
-                            </a>
-                            <a href="{% url 'payments:create_donation' animal.slug %}?amount=25" 
-                               class="text-cyan-700 hover:text-cyan-800 font-medium">
-                                £25
-                            </a>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Login reminder -->
