@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Volunteer With Us - AnimalRescue{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <!-- Page Header -->
+    <div class="text-center mb-10">
+        <h1 class="text-4xl font-bold text-cyan-800 mb-4">Volunteer With Us</h1>
+        <p class="text-lg text-lime-950">Join our mission to help rescued animals</p>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="bg-white rounded-xl shadow-lg border border-lime-100 p-8">
+        <!-- Introduction -->
+        <div class="mb-8">
+            <p class="text-lime-950 mb-4">
+                Thank you for your interest in volunteering with our animal rescue farm. We are always grateful to hear from people who want to support our animals and become part of our work.
+            </p>
+        </div>
+
+        <!-- Current Process -->
+        <div class="mb-8 p-6 bg-lime-50 rounded-lg border border-lime-200">
+            <h2 class="text-2xl font-bold text-cyan-800 mb-4">How to Apply</h2>
+            <p class="text-lime-950 mb-4">
+                At the moment, our volunteer programme is managed directly by our team while we prepare a dedicated volunteer application system.
+            </p>
+            <p class="text-lime-950 mb-6">
+                If you would like to volunteer with us, please contact us by email at:
+            </p>
+            <div class="text-center inline-block bg-cyan-800 text-white font-medium py-3 px-8 rounded-lg text-lg">
+                    hello@animalrescue.org
+            </div>
+        </div>
+
+        <!-- What to Include -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold text-cyan-800 mb-4">What to Include in Your Message</h3>
+            <ul class="space-y-3 text-lime-950">
+                <li class="flex items-start">
+                    <span>A little about yourself and why you would like to volunteer</span>
+                </li>
+                <li class="flex items-start">
+                    <span>Any relevant experience (previous work with animals, volunteering, or helpful skills)</span>
+                </li>
+                <li class="flex items-start">
+                    <span><strong>No experience?</strong> That's absolutely fine — we're equally interested in your motivation and willingness to learn</span>
+                </li>
+                <li class="flex items-start">
+                    <span>Your general availability and whether you're interested in working with animals directly or supporting in other ways</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Important Note -->
+        <div class="p-6 bg-cyan-50 rounded-lg border border-cyan-200">
+            <h3 class="text-xl font-bold text-cyan-800 mb-3">Important Information</h3>
+            <p class="text-cyan-900">
+                Due to the nature of rescue work and the needs of our animals, we are unable to respond immediately to every enquiry, but we will be in touch as soon as possible. Thank you for your patience and for considering supporting our sanctuary.
+            </p>
+            <p class="text-cyan-900 mt-4 font-medium">
+                We truly appreciate your interest and look forward to hearing from you.
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-10 pt-8 border-t border-lime-200 flex flex-col sm:flex-row justify-center gap-6">
+            <a href="{% url 'animals:list' %}" 
+               class="inline-block text-center bg-lime-200 hover:bg-lime-300 text-lime-900 font-medium py-3 px-6 rounded-lg transition duration-300">
+                Meet Our Animals
+            </a>
+            <a href="{% url 'home' %}" 
+               class="inline-block text-center border border-cyan-300 text-cyan-700 hover:bg-cyan-50 font-medium py-3 px-6 rounded-lg transition duration-300">
+                Return Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

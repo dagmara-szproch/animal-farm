@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from animals.views import home
+from animal_farm.views import volunteer_info
 
 urlpatterns = [
     path('accounts/', include('accounts.urls')),
@@ -24,5 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('animals/', include('animals.urls', namespace='animals')),
     path('payments/', include('payments.urls')),
+    path('volunteer/', volunteer_info, name='volunteer_info'),
     path('', home, name='home'),
 ]
