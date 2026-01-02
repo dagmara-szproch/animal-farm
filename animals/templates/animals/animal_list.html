@@ -37,9 +37,9 @@
                 
                 <!-- Animal info -->
                 <div class="p-4">
-                    <h3 class="font-bold text-lg text-cyan-800 group-hover:text-cyan-700 transition-colors">
+                    <h2 class="font-bold text-lg text-cyan-800 group-hover:text-cyan-700 transition-colors">
                         {{ animal.name }}
-                    </h3>
+                    </h2>
                     <p class="text-lime-700 text-sm">{{ animal.species }}</p>
                     
                     {% if animal.category %}
@@ -62,7 +62,7 @@
     
     <!-- Simple message when you have many animals -->
     {% if animals|length >= 15 %}
-    <div class="text-center text-sm text-lime-600 mt-8">
+    <div class="text-center text-sm text-lime-800 mt-8">
         Showing all {{ animals|length }} animals
     </div>
     {% endif %}
