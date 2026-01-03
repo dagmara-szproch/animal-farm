@@ -69,7 +69,7 @@
                 {% if animal.story %}
                 <div class="mt-6 pt-6 border-t border-lime-200">
                     <h3 class="text-lg font-bold text-cyan-800 mb-3">Their Story</h3>
-                    <p class="text-gray-600 italic">{{ animal.story|linebreaks }}</p>
+                    <div class="space-y-4 text-gray-700">{{ animal.story|linebreaks }}</div>
                 </div>
                 {% endif %}
             </div>
