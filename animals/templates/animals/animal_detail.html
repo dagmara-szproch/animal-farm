@@ -2,22 +2,22 @@
 {% load static %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto p-6">
-    <!-- Navigation -->
-    <div class="md:hidden mt-4 mb-8 flex justify-between">
-        <a href="{% url 'animals:list' %}" class="text-cyan-700 hover:text-cyan-800">
+<div class="max-w-4xl mx-auto p-4 md:p-6">
+    <!-- Mobile Navigation (top) -->
+    <div class="md:hidden mb-6 flex justify-between items-center">
+        <a href="{% url 'animals:list' %}" class="text-cyan-700 hover:text-cyan-800 text-sm">
             ← All Animals
         </a>
         {% if animal.category %}
-        <a href="{% url 'animals:by_category' animal.category.slug %}" class="text-cyan-700 hover:text-cyan-800">
+        <a href="{% url 'animals:by_category' animal.category.slug %}" class="text-cyan-700 hover:text-cyan-800 text-sm">
             More {{ animal.category.name }} →
         </a>
         {% endif %}
     </div>
 
     <!-- Animal header -->
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold text-cyan-800">{{ animal.name }}</h1>
+    <div class="mb-6 md:mb-8">
+        <h1 class="text-2xl md:text-3xl font-bold text-cyan-800">{{ animal.name }}</h1>
         {% if animal.category %}
         <div class="inline-block bg-lime-100 text-cyan-800 px-3 py-1 rounded-full text-sm mt-2">
             {{ animal.category.name }}
@@ -26,82 +26,60 @@
     </div>
 
     <!-- Main content grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Left: Image -->
-        <div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+        <!-- Left column (Image + Story) -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Image -->
             <div class="bg-lime-50 p-4 rounded-xl shadow">
                 <img src="{{ animal.image_or_placeholder }}" 
                      alt="{{ animal.name }}" 
-                     class="w-full h-64 md:h-80 object-cover rounded-lg">
+                     class="w-full h-64 md:h-96 object-cover rounded-lg">
             </div>
-        <!-- Total donations -->
-        <div class="bg-cyan-50 p-4 rounded-lg mb-6 mt-12 shadow border border-cyan-200">
-            <div class="grid grid-cols-2 gap-4">
-                <div class="text-center">
-                    <p class="text-sm text-cyan-700">Total Raised</p>
-                    <p class="text-2xl font-bold text-cyan-800">£{{ animal.total_donations }}</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-sm text-cyan-700">Supporters</p>
-                    <p class="text-2xl font-bold text-cyan-800">{{ animal.donation_count }}</p>
-                </div>
-            </div>
-        </div>
-        <!-- Messages Section -->
-        {% if approved_messages %}
-        <div class="mt-12">
-            <h2 class="text-2xl font-bold text-cyan-800 mb-6">Messages from Supporters</h2>
-            <div class="space-y-6">
-                {% for payment in approved_messages %}
-                <div class="bg-lime-50 p-6 rounded-xl shadow border border-lime-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <p class="font-bold text-cyan-800">{{ payment.display_name }}</p>
-                            <p class="text-sm text-cyan-600">
-                                Donated £{{ payment.amount }} • {{ payment.created_at|date:"d M Y" }}
-                            </p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic pl-4 border-l-4 border-cyan-300 py-2">
-                        "{{ payment.message }}"
-                    </p>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-        </div>
 
-        <!-- Right: Description & Donation -->
-        <div class="space-y-6">
-            <!-- Description -->
-            <div class="bg-white p-6 rounded-xl shadow border border-lime-100">
-                <h2 class="text-xl font-bold text-cyan-800 mb-4">Meet {{ animal.name }}</h2>
-                <p class="text-gray-700 mb-4">{{ animal.description }}</p>
+            <!-- Description & Story -->
+            <div class="bg-white p-5 md:p-6 rounded-xl shadow border border-lime-100">
+                <h2 class="text-xl md:text-2xl font-bold text-cyan-800 mb-4">Meet {{ animal.name }}</h2>
+                <p class="text-gray-700 mb-6 text-base md:text-lg">{{ animal.description }}</p>
                 
                 {% if animal.story %}
                 <div class="mt-6 pt-6 border-t border-lime-200">
-                    <h3 class="text-lg font-bold text-cyan-800 mb-3">Their Story</h3>
-                    <div class="space-y-4 text-gray-700">{{ animal.story|linebreaks }}</div>
+                    <h3 class="text-lg md:text-xl font-bold text-cyan-800 mb-4">Their Story</h3>
+                    <div class="space-y-4 text-gray-700 text-base md:text-lg">{{ animal.story|linebreaks }}</div>
                 </div>
                 {% endif %}
             </div>
+        </div>
 
-            <!-- Donation Section-->
-            <div class="bg-lime-50 p-6 rounded-xl shadow border border-lime-200">
+        <!-- Right column (Stats + Donate + Messages) -->
+        <div class="space-y-6">
+            <!-- Stats Card -->
+            <div class="bg-cyan-50 p-5 md:p-6 rounded-xl shadow border border-cyan-200">
+                <h3 class="text-lg font-bold text-cyan-800 mb-4 text-center">Support Statistics</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <p class="text-sm text-cyan-700">Total Raised</p>
+                        <p class="text-2xl font-bold text-cyan-800">£{{ animal.total_donations }}</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm text-cyan-700">Supporters</p>
+                        <p class="text-2xl font-bold text-cyan-800">{{ animal.donation_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Donation Card -->
+            <div class="bg-lime-50 p-5 md:p-6 rounded-xl shadow border border-lime-200">
                 <h2 class="text-xl font-bold text-cyan-800 mb-4">Support {{ animal.name }}</h2>
                 
                 <p class="text-gray-700 mb-6">
                     Your donation helps provide food, medical care, and shelter for {{ animal.name }}.
                 </p>
 
-                <!-- Simple donation button -->
-                <div class="space-y-4">
-                    <a href="{% url 'payments:create_donation' animal.slug %}" 
-                       class="block w-full bg-cyan-800 hover:bg-cyan-700 text-white font-bold py-3 px-4 rounded-lg text-center transition">
-                        💝 Donate to {{ animal.name }}
-                    </a>
-                </div>
+                <!-- Donation button -->
+                <a href="{% url 'payments:create_donation' animal.slug %}" 
+                   class="block w-full bg-cyan-800 hover:bg-cyan-700 text-white font-bold py-3 px-4 rounded-lg text-center transition text-base md:text-lg">
+                    💝 Donate to {{ animal.name }}
+                </a>
 
                 <!-- Login reminder -->
                 {% if not user.is_authenticated %}
@@ -113,11 +91,35 @@
                 </div>
                 {% endif %}
             </div>
+
+            <!-- Messages Section -->
+            {% if approved_messages %}
+            <div class="bg-white p-5 md:p-6 rounded-xl shadow border border-lime-100">
+                <h2 class="text-xl font-bold text-cyan-800 mb-4">Messages from Supporters</h2>
+                <p class="text-sm text-cyan-600 mb-4">{{ approved_messages|length }} message{{ approved_messages|length|pluralize }}</p>
+                
+                <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                    {% for payment in approved_messages %}
+                    <div class="bg-lime-50 p-4 rounded-lg border border-lime-200">
+                        <div class="mb-3">
+                            <p class="font-bold text-cyan-800 text-sm">{{ payment.display_name }}</p>
+                            <p class="text-xs text-cyan-600">
+                                Donated £{{ payment.amount }} • {{ payment.created_at|date:"d M Y" }}
+                            </p>
+                        </div>
+                        <p class="text-gray-700 text-sm italic pl-3 border-l-2 border-cyan-300 py-1">
+                            "{{ payment.message }}"
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 
-    <!-- Navigation -->
-    <div class="mt-8 flex justify-between">
+    <!-- Desktop Navigation (bottom) -->
+    <div class="hidden md:flex mt-8 justify-between">
         <a href="{% url 'animals:list' %}" class="text-cyan-700 hover:text-cyan-800">
             ← All Animals
         </a>
@@ -128,4 +130,41 @@
         {% endif %}
     </div>
 </div>
+
+<!-- Mobile bottom navigation -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-4 flex justify-between z-10">
+    <a href="{% url 'animals:list' %}" class="text-cyan-700 hover:text-cyan-800 text-sm">
+        ← All Animals
+    </a>
+    <a href="{% url 'payments:create_donation' animal.slug %}" 
+       class="bg-cyan-800 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg text-sm">
+        Donate
+    </a>
+    {% if animal.category %}
+    <a href="{% url 'animals:by_category' animal.category.slug %}" class="text-cyan-700 hover:text-cyan-800 text-sm">
+        More {{ animal.category.name }} →
+    </a>
+    {% endif %}
+</div>
+
+<!-- Spacer for fixed bottom nav -->
+<div class="md:hidden h-16"></div>
+
+<style>
+/* Custom scrollbar for messages */
+.max-h-96::-webkit-scrollbar {
+    width: 6px;
+}
+.max-h-96::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+.max-h-96::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+.max-h-96::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+</style>
 {% endblock %}
