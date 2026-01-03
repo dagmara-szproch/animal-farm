@@ -3,7 +3,11 @@ from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_http_methods
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 from animals.models import Animal
 from .models import Payment
 
@@ -134,3 +138,45 @@ def payment_success(request):
         del request.session['last_donation_ref']
 
     return render(request, 'payments/success.html', context)
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def edit_message(request, payment_id):
+    """Edit a message associated with a donation"""
+    payment = get_object_or_404(Payment, id=payment_id, user=request.user)
+    
+    if request.method == 'GET':
+        # Return message data for editing
+        return JsonResponse({
+            'message': payment.message,
+            'animal_name': payment.animal.name if payment.animal else None,
+            'created_at': payment.created_at.strftime('%d %b %Y')
+        })
+    
+    elif request.method == 'POST':
+        # Update message
+        try:
+            data = json.loads(request.body)
+            new_message = data.get('message', '').strip()[:500]
+            
+            payment.message = new_message
+            payment.message_status = 'pending'  # Reset to pending for admin review
+            payment.save()
+            
+            messages.success(request, 'Message updated! It will be reviewed by an admin before appearing publicly.')
+            return JsonResponse({'success': True})
+            
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)}, status=400)
+
+@login_required
+@require_POST
+def delete_message(request, payment_id):
+    """Delete a message"""
+    payment = get_object_or_404(Payment, id=payment_id, user=request.user)
+    payment.message = ''
+    payment.message_status = 'rejected'
+    payment.save()
+    
+    messages.success(request, 'Message deleted successfully.')
+    return JsonResponse({'success': True})

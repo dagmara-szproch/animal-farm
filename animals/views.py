@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render
 from django.db.models import Q
-from .models import Animal, Category
+from .models import Animal
+from payments.models import Payment
 
 
 def home(request):
@@ -41,3 +42,16 @@ class AnimalDetailView(DetailView):
     model = Animal
     template_name = 'animals/animal_detail.html'
     context_object_name = 'animal'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get approved messages for this animal
+        animal = self.object
+        approved_messages = Payment.objects.filter(
+            animal=animal,
+            message_status='approved',
+            message__isnull=False
+        ).exclude(message='').order_by('-created_at')
+        
+        context['approved_messages'] = approved_messages
+        return context
