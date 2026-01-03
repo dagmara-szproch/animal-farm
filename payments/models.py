@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from animals.models import Animal
 
 
 class Payment(models.Model):
@@ -48,7 +47,7 @@ class Payment(models.Model):
         blank=True
     )
     animal = models.ForeignKey(
-        Animal,
+        'animals.Animal',
         on_delete=models.SET_NULL,
         null=True,
         blank=True

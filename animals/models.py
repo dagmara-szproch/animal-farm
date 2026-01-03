@@ -101,3 +101,23 @@ class Animal(models.Model):
             self.slug = slug
 
         super().save(*args, **kwargs)
+
+    @property
+    def total_donations(self):
+        """Return total donated amount for this animal"""
+        from django.db.models import Sum
+        from payments.models import Payment 
+        result = Payment.objects.filter(
+            animal=self,
+            status='succeeded'
+        ).aggregate(total=Sum('amount'))
+        return result['total'] or 0
+
+    @property
+    def donation_count(self):
+        """Return number of successful donations"""
+        from payments.models import Payment
+        return Payment.objects.filter(
+            animal=self,
+            status='succeeded'
+        ).count()

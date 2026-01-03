@@ -71,12 +71,12 @@ def process_donation(request, animal_slug):
         amount = float(request.POST.get('amount', 0))
         message = request.POST.get('message', '').strip()
         payment_intent_id = request.POST.get('payment_intent_id')
- 
+
         if not payment_intent_id:
             messages.error(request, 'Payment information missing.')
             return redirect('payments:create_donation',
                             animal_slug=animal_slug)
- 
+
         # Verify the payment succeeded
         intent = stripe.PaymentIntent.retrieve(payment_intent_id)
 
@@ -139,12 +139,13 @@ def payment_success(request):
 
     return render(request, 'payments/success.html', context)
 
+
 @login_required
 @require_http_methods(["GET", "POST"])
 def edit_message(request, payment_id):
     """Edit a message associated with a donation"""
     payment = get_object_or_404(Payment, id=payment_id, user=request.user)
-    
+
     if request.method == 'GET':
         # Return message data for editing
         return JsonResponse({
@@ -152,22 +153,26 @@ def edit_message(request, payment_id):
             'animal_name': payment.animal.name if payment.animal else None,
             'created_at': payment.created_at.strftime('%d %b %Y')
         })
-    
+
     elif request.method == 'POST':
         # Update message
         try:
             data = json.loads(request.body)
             new_message = data.get('message', '').strip()[:500]
-            
+
             payment.message = new_message
-            payment.message_status = 'pending'  # Reset to pending for admin review
+            # Reset to pending for admin review
+            payment.message_status = 'pending'
             payment.save()
-            
-            messages.success(request, 'Message updated! It will be reviewed by an admin before appearing publicly.')
+
+            messages.success(request,
+                             'Message updated and is pending approval.')
             return JsonResponse({'success': True})
-            
+
         except Exception as e:
-            return JsonResponse({'success': False, 'error': str(e)}, status=400)
+            return JsonResponse({'success': False,
+                                 'error': str(e)}, status=400)
+
 
 @login_required
 @require_POST
@@ -177,6 +182,6 @@ def delete_message(request, payment_id):
     payment.message = ''
     payment.message_status = 'rejected'
     payment.save()
-    
+
     messages.success(request, 'Message deleted successfully.')
     return JsonResponse({'success': True})
