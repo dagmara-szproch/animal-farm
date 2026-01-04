@@ -7,52 +7,91 @@
 <div class="max-w-md mx-auto my-12 p-6 bg-lime-50 rounded-lg shadow">
     <h1 class="text-3xl font-bold text-cyan-800 mb-6 text-center">Create Account</h1>
     
+    <!-- Silent Validation Errors on Registration was fixed by AI (Deepseek) -->   
+    <!-- IMPORTANT: Add hidden form fields for Allauth validation -->
+    {% csrf_token %}
+    {{ form.username.as_hidden }}
+    {{ form.email.as_hidden }}
+    {{ form.email2.as_hidden }}
+    {{ form.password1.as_hidden }}
+    {{ form.password2.as_hidden }}
+    
+    <!-- Error display -->
+    {% if form.errors %}
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <p class="font-bold text-red-800 mb-2">Please fix the errors:</p>
+        <ul class="text-red-700 text-sm list-disc pl-5">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
     <form method="POST" action="{% url 'account_signup' %}">
         {% csrf_token %}
 
+        <!-- Username field -->
         <div class="mb-4">
             <label class="block text-lime-950 mb-2">Username</label>
             <input type="text" name="username" required 
-                   class="w-full px-4 py-2 border border-lime-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                   value="{{ form.username.value|default:'' }}"
+                   class="w-full px-4 py-2 border {% if form.username.errors %}border-red-500{% else %}border-lime-300{% endif %} rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
                    placeholder="Choose a username">
+            {% if form.username.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.username.errors.0 }}</p>
+            {% endif %}
         </div>
 
+        <!-- Email field -->
         <div class="mb-4">
             <label class="block text-lime-950 mb-2">Email Address</label>
             <input type="email" name="email" required 
-                   class="w-full px-4 py-2 border border-lime-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                   value="{{ form.email.value|default:'' }}"
+                   class="w-full px-4 py-2 border {% if form.email.errors %}border-red-500{% else %}border-lime-300{% endif %} rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
                    placeholder="you@example.com">
+            {% if form.email.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.email.errors.0 }}</p>
+            {% endif %}
         </div>
-
+        
+        <!-- Confirm Email field -->
         <div class="mb-4">
             <label class="block text-lime-950 mb-2">Confirm Email Address</label>
             <input type="email" name="email2" required 
-                    class="w-full px-4 py-2 border border-lime-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
-                    placeholder="you@example.com">
+                   value="{{ form.email2.value|default:'' }}"
+                   class="w-full px-4 py-2 border {% if form.email2.errors %}border-red-500{% else %}border-lime-300{% endif %} rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                   placeholder="Confirm your email">
+            {% if form.email2.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.email2.errors.0 }}</p>
+            {% endif %}
         </div>
         
+        <!-- Password fields -->
         <div class="mb-4">
             <label class="block text-lime-950 mb-2">Password</label>
             <input type="password" name="password1" required 
-                   class="w-full px-4 py-2 border border-lime-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                   class="w-full px-4 py-2 border {% if form.password1.errors %}border-red-500{% else %}border-lime-300{% endif %} rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
                    placeholder="••••••••">
+            {% if form.password1.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.password1.errors.0 }}</p>
+            {% endif %}
             <p class="text-sm text-lime-700 mt-1">At least 8 characters</p>
         </div>
         
         <div class="mb-6">
             <label class="block text-lime-950 mb-2">Confirm Password</label>
             <input type="password" name="password2" required 
-                   class="w-full px-4 py-2 border border-lime-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                   class="w-full px-4 py-2 border {% if form.password2.errors %}border-red-500{% else %}border-lime-300{% endif %} rounded focus:outline-none focus:ring-2 focus:ring-cyan-300"
                    placeholder="••••••••">
-        </div>
-        
-        <div class="mb-6 text-sm">
-            <input type="checkbox" name="terms" id="terms" required
-                   class="h-4 w-4 text-cyan-800 border-lime-300 rounded">
-            <label for="terms" class="ml-2 text-lime-950">
-                I agree to the <a href="#" class="text-cyan-800 hover:underline">Terms</a> and 
-                <a href="#" class="text-cyan-800 hover:underline">Privacy Policy</a>
-            </label>
+            {% if form.password2.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.password2.errors.0 }}</p>
+            {% endif %}
         </div>
         
         <button type="submit" 
